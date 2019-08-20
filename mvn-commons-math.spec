@@ -4,15 +4,20 @@
 #
 Name     : mvn-commons-math
 Version  : math.2.2
-Release  : 1
+Release  : 2
 URL      : https://github.com/apache/commons-math/archive/MATH_2_2.tar.gz
 Source0  : https://github.com/apache/commons-math/archive/MATH_2_2.tar.gz
-Source1  : https://repo1.maven.org/maven2/org/apache/commons/commons-math/2.2/commons-math-2.2.jar
-Source2  : https://repo1.maven.org/maven2/org/apache/commons/commons-math/2.2/commons-math-2.2.pom
+Source1  : https://repo.maven.apache.org/maven2/org/apache/commons/commons-math/2.1/commons-math-2.1.jar
+Source2  : https://repo.maven.apache.org/maven2/org/apache/commons/commons-math/2.1/commons-math-2.1.pom
+Source3  : https://repo1.maven.org/maven2/org/apache/commons/commons-math/2.2/commons-math-2.2.jar
+Source4  : https://repo1.maven.org/maven2/org/apache/commons/commons-math/2.2/commons-math-2.2.pom
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : Apache-2.0
 Requires: mvn-commons-math-data = %{version}-%{release}
+Requires: mvn-commons-math-license = %{version}-%{release}
+BuildRequires : apache-ant
+BuildRequires : buildreq-mvn
 
 %description
 No detailed description available
@@ -25,16 +30,33 @@ Group: Data
 data components for the mvn-commons-math package.
 
 
+%package license
+Summary: license components for the mvn-commons-math package.
+Group: Default
+
+%description license
+license components for the mvn-commons-math package.
+
+
 %prep
+%setup -q -n commons-math-MATH_2_2
 
 %build
 
 %install
-mkdir -p %{buildroot}/usr/share/java/.m2/repository/org/apache/commons/commons-math/2.2
-cp %{SOURCE1} %{buildroot}/usr/share/java/.m2/repository/org/apache/commons/commons-math/2.2/commons-math-2.2.jar
+mkdir -p %{buildroot}/usr/share/package-licenses/mvn-commons-math
+cp license-header.txt %{buildroot}/usr/share/package-licenses/mvn-commons-math/license-header.txt
+mkdir -p %{buildroot}/usr/share/java/.m2/repository/org/apache/commons/commons-math/2.1
+cp %{SOURCE1} %{buildroot}/usr/share/java/.m2/repository/org/apache/commons/commons-math/2.1/commons-math-2.1.jar
+
+mkdir -p %{buildroot}/usr/share/java/.m2/repository/org/apache/commons/commons-math/2.1
+cp %{SOURCE2} %{buildroot}/usr/share/java/.m2/repository/org/apache/commons/commons-math/2.1/commons-math-2.1.pom
 
 mkdir -p %{buildroot}/usr/share/java/.m2/repository/org/apache/commons/commons-math/2.2
-cp %{SOURCE2} %{buildroot}/usr/share/java/.m2/repository/org/apache/commons/commons-math/2.2/commons-math-2.2.pom
+cp %{SOURCE3} %{buildroot}/usr/share/java/.m2/repository/org/apache/commons/commons-math/2.2/commons-math-2.2.jar
+
+mkdir -p %{buildroot}/usr/share/java/.m2/repository/org/apache/commons/commons-math/2.2
+cp %{SOURCE4} %{buildroot}/usr/share/java/.m2/repository/org/apache/commons/commons-math/2.2/commons-math-2.2.pom
 
 
 %files
@@ -42,5 +64,11 @@ cp %{SOURCE2} %{buildroot}/usr/share/java/.m2/repository/org/apache/commons/comm
 
 %files data
 %defattr(-,root,root,-)
+/usr/share/java/.m2/repository/org/apache/commons/commons-math/2.1/commons-math-2.1.jar
+/usr/share/java/.m2/repository/org/apache/commons/commons-math/2.1/commons-math-2.1.pom
 /usr/share/java/.m2/repository/org/apache/commons/commons-math/2.2/commons-math-2.2.jar
 /usr/share/java/.m2/repository/org/apache/commons/commons-math/2.2/commons-math-2.2.pom
+
+%files license
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/mvn-commons-math/license-header.txt
