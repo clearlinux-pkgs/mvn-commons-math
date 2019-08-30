@@ -4,7 +4,7 @@
 #
 Name     : mvn-commons-math
 Version  : math.2.2
-Release  : 2
+Release  : 3
 URL      : https://github.com/apache/commons-math/archive/MATH_2_2.tar.gz
 Source0  : https://github.com/apache/commons-math/archive/MATH_2_2.tar.gz
 Source1  : https://repo.maven.apache.org/maven2/org/apache/commons/commons-math/2.1/commons-math-2.1.jar
